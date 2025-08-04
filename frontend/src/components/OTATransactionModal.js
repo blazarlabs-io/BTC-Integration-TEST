@@ -34,7 +34,6 @@ const OTATransactionModal = ({
     setIsLoading(true);
     setError("");
 
-    // Declare variables in function scope so they're accessible in catch block
     let amountValue;
     let network;
 
@@ -272,13 +271,6 @@ const OTATransactionModal = ({
   const checkBalance = async () => {
     try {
       const balance = await window.unisat.getBalance();
-      console.log("Raw balance object:", balance);
-      console.log("Balance type:", typeof balance);
-
-      if (balance) {
-        console.log("Balance properties:", Object.keys(balance));
-        console.log("Balance values:", Object.values(balance));
-      }
 
       alert(`Balance check complete. Check console for details.`);
     } catch (error) {
@@ -289,28 +281,22 @@ const OTATransactionModal = ({
 
   // Test function using the same approach as working implementation
   const testSendTransaction = async () => {
-    console.log("Testing tBTC send with working approach...");
-
     try {
       // Connect to wallet
       const accounts = await window.unisat.requestAccounts();
       const currentAccount = accounts[0];
-      console.log("Connected account:", currentAccount);
 
       // Switch to testnet
       const network = await window.unisat.getNetwork();
-      console.log("Current network:", network);
 
       if (network !== "testnet") {
         console.log("Switching to testnet...");
         await window.unisat.switchNetwork("testnet");
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        console.log("Switched to testnet");
       }
 
       // Check balance before testing
       const balance = await window.unisat.getBalance();
-      console.log("Current balance:", balance);
 
       // Convert test amount to satoshis (integer) as required by Unisat API
       const testAmount = 0.0001; // 0.0001 tBTC
@@ -331,13 +317,11 @@ const OTATransactionModal = ({
 
       try {
         // First try with satoshis (integer)
-        console.log("Test: Attempting to send with satoshis:", testSatoshis);
         result = await window.unisat.sendBitcoin(otaAddress, testSatoshis, {
           feeRate: 1, // Use 1 sat/vB as shown in the working example
           memo: memoData, // Include the memo data
           enableRBF: true, // Enable RBF as shown in the working example
         });
-        console.log("Test: Success with satoshis:", result);
       } catch (error) {
         console.log(
           "Test: Failed with satoshis, trying with BTC amount:",
@@ -346,13 +330,11 @@ const OTATransactionModal = ({
 
         try {
           // Try with BTC amount (number)
-          console.log("Test: Attempting to send with BTC amount:", testAmount);
           result = await window.unisat.sendBitcoin(otaAddress, testAmount, {
             feeRate: 1, // Use 1 sat/vB as shown in the working example
             memo: memoData, // Include the memo data
             enableRBF: true, // Enable RBF as shown in the working example
           });
-          console.log("Test: Success with BTC amount:", result);
         } catch (btcError) {
           console.log(
             "Test: Failed with BTC amount, trying with string format:",
@@ -362,16 +344,11 @@ const OTATransactionModal = ({
           try {
             // Try with string format
             const amountString = testAmount.toFixed(8);
-            console.log(
-              "Test: Attempting to send with string format:",
-              amountString
-            );
             result = await window.unisat.sendBitcoin(otaAddress, amountString, {
               feeRate: 1, // Use 1 sat/vB as shown in the working example
               memo: memoData, // Include the memo data
               enableRBF: true, // Enable RBF as shown in the working example
             });
-            console.log("Test: Success with string format:", result);
           } catch (stringError) {
             console.log("Test: All amount formats failed:", {
               satoshisError: error,
@@ -391,10 +368,8 @@ const OTATransactionModal = ({
         }
       }
 
-      console.log("✅ Test successful:", result);
       alert(`Test successful! TXID: ${result}`);
     } catch (error) {
-      console.error("❌ Test failed:", error);
       alert(`Test failed: ${error.message}`);
     }
   };
