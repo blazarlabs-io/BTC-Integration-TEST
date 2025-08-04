@@ -64,7 +64,7 @@ const BridgeForm = ({ walletAddress, onTransactionCreated, setLoading }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:60824/api/bridge/create-transaction",
+        "http://localhost:5000/api/bridge/create-transaction",
         {
           fromAccount: walletAddress,
           toAccount: formData.toAccount,
