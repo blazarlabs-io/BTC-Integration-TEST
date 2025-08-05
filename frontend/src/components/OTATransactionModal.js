@@ -418,7 +418,7 @@ const OTATransactionModal = ({
               <p>Transaction Hash:</p>
               <div className="ota-tx-hash">
                 <a
-                  href={`https://testnet.blockstream.info/tx/${txHash}`}
+                  href={`https://blockstream.info/testnet/tx/${txHash}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

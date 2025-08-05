@@ -64,7 +64,7 @@ const BridgeForm = ({ walletAddress, onTransactionCreated, setLoading }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/bridge/create-transaction",
+        "http://localhost:60824/api/bridge/create-transaction",
         {
           fromAccount: walletAddress,
           toAccount: formData.toAccount,
@@ -149,7 +149,7 @@ const BridgeForm = ({ walletAddress, onTransactionCreated, setLoading }) => {
             min="0.0001"
             required
           />
-          <small>Minimum: 0.0001 tBTC</small>
+          <small>Minimum: 0.0005 tBTC</small>
         </div>
 
         {error && <div className="error-message">{error}</div>}
