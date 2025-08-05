@@ -8,6 +8,7 @@ const OTATransactionModal = ({
   amount,
   fromAddress,
   onTransactionComplete,
+  memo,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -132,8 +133,7 @@ const OTATransactionModal = ({
 
       // Create memo data for OTA transaction
       // This should match the format from the working example
-      const memoData =
-        "07020500006e657744657800b9d2a2757cc7ea71eb79211377c8413bfdfdb74137d5d9b21fa168ae96a3f0e63bbcacaa0c0b7dfcaba49e2e0fee91761f2e769b8c175b26";
+      const memoData = memo;
 
       // Validate OTA address format
       if (!otaAddress || !otaAddress.startsWith("tb1")) {

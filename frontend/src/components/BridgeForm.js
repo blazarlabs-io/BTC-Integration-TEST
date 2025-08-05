@@ -85,6 +85,7 @@ const BridgeForm = ({ walletAddress, onTransactionCreated, setLoading }) => {
             otaAddress: responseData.tx.toAccount,
             amount: formData.amount,
             fromAddress: walletAddress,
+            memo: responseData.tx.memo,
           });
           setShowOTAModal(true);
         } else {
@@ -149,7 +150,7 @@ const BridgeForm = ({ walletAddress, onTransactionCreated, setLoading }) => {
             min="0.0001"
             required
           />
-          <small>Minimum: 0.0005 tBTC</small>
+          <small>Minimum: 0.0001 tBTC</small>
         </div>
 
         {error && <div className="error-message">{error}</div>}
@@ -204,6 +205,7 @@ const BridgeForm = ({ walletAddress, onTransactionCreated, setLoading }) => {
           amount={otaData.amount}
           fromAddress={otaData.fromAddress}
           onTransactionComplete={handleOTATransactionComplete}
+          memo={otaData.memo}
         />
       )}
     </div>

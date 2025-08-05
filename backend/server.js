@@ -37,6 +37,8 @@ app.post("/api/bridge/create-transaction", async (req, res) => {
     );
 
     console.log("Bridge Payload:");
+    console.log(bridgePayload);
+
     console.log(response.data);
 
     res.json(response.data);
